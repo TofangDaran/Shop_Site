@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React , {useState , useEffect} from 'react';
 
 //Source image
 import { imageSource } from '../ImgaeSliderSource';
@@ -13,8 +13,18 @@ const Banner = () => {
     const innerType = [
         "inner-left","inner-right","inner-top","inner-bottom"
     ]
+    
 
     const length = imageSource.length;
+
+    useEffect(()=>{
+        const timeout = setTimeout(() => {
+            nextSlide();
+        }, 5000);
+        return() => {
+            clearTimeout(timeout);
+        }
+    },[slideIndex])    
 
     const nextSlide = () => {
         setSlideIndex(slideIndex === length  ? 1 : slideIndex + 1);
